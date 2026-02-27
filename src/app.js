@@ -24,6 +24,20 @@ app.use(express.json());
 app.use('/profile', profileRoutes);
 app.use('/submissions', submissionRoutes);
 
+// Root: show API is up and list routes
+app.get('/', (req, res) => {
+  res.status(200).json({
+    name: 'VitalTwin Backend',
+    status: 'ok',
+    endpoints: {
+      health: 'GET /health',
+      saveSubmission: 'POST /profile or POST /submissions',
+      getLatest: 'GET /profile or GET /submissions/latest',
+      getById: 'GET /profile/:id',
+    },
+  });
+});
+
 // Health check
 app.get('/health', (req, res) => {
   res.status(200).json({ ok: true });
